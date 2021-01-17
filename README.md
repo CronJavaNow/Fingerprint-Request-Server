@@ -1,6 +1,6 @@
 # Fingerprint-Request-Server
 A very simple SSL Fingerprint Request Server for requesting SSL Fingerprint for HTTPS request from IoT or other projects.
-
+- - - -
   
 * run
   * python main.py
@@ -11,7 +11,5 @@ A very simple SSL Fingerprint Request Server for requesting SSL Fingerprint for 
 * return (json)
   * {"finger_print": "DF:B2:29:C6:A6:38:1A:59:9D:C9:AD:92:2D:26:F5:3C:83:8F:A5:87"}
 
-
-
-
-ESP2866 & ESP32
+* current project
+  * ESP2866 & ESP32
