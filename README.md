@@ -1,5 +1,5 @@
 # Fingerprint-Request-Server
-A very simple SSL Fingerprint Request Server for requesting SSL Fingerprint for HTTPS request from IoT.
+A very simple SSL Fingerprint Request Server for requesting SSL Fingerprint for HTTPS request from IoT Devices.
 - - - -
   
 * run
