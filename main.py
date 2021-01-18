@@ -23,10 +23,13 @@ def server():
 
 
 def my_cert(site):
-    cert = ssl.get_server_certificate((site, 443))
-    x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
-    sha1_fingerprint = x509.digest('sha1')
-    return sha1_fingerprint.decode("utf-8")
+    try:
+        cert = ssl.get_server_certificate((site, 443))
+        x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
+        sha1_fingerprint = x509.digest('sha1')
+        return sha1_fingerprint.decode("utf-8")
+    except:
+        return 'null'
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -35,8 +38,13 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'application/json')
         self.end_headers()
         query_components = parse_qs(urlparse(self.path).query)
-        js = json.dumps({'finger_print': my_cert(str(query_components['site'][0]))})
-        self.wfile.write(js.encode('utf-8'))
+        print(query_components)
+        if not query_components or next(iter(query_components)) != 'site':
+            message = json.dumps({'error': 'unknown param or url.'})
+            self.wfile.write(message.encode('utf-8'))
+        else:
+            finger_print = json.dumps({'finger_print': my_cert(str(query_components['site'][0]))})
+            self.wfile.write(finger_print.encode('utf-8'))
 
 
 server()
